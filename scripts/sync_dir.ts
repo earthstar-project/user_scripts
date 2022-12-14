@@ -1,60 +1,28 @@
-import * as Earthstar from "https://deno.land/x/earthstar@v10.0.0-alpha.3/mod.ts";
-import { parse } from "https://deno.land/std@0.158.0/flags/mod.ts";
-import {
-  replicaFromArchive,
-  replicaToArchive,
-} from "../helpers/replica_archive.ts";
+import { Earthstar, Input } from "../deps.ts";
+import { pickReplica } from "../helpers/pick_replica.ts";
 
-// Parse arguments and validate their presence.
-const { share, shareSecret, author, authorSecret, archivePath, dirPath } =
-  parse(
-    Deno.args,
-    {
-      string: [
-        "share",
-        "shareSecret",
-        "author",
-        "authorSecret",
-        "archivePath",
-        "dirPath",
-      ],
-    },
-  );
+const settings = new Earthstar.ClientSettings();
 
-if (
-  !share || !shareSecret || !author || !authorSecret || !archivePath || !dirPath
-) {
-  console.group("You must provide a flag for the following:");
-
-  console.log("--share", `(you provided ${share})`);
-  console.log("--shareSecret", `(you provided ${shareSecret})`);
-  console.log("--author", `(you provided ${author})`);
-  console.log("--authorSecret", `(you provided ${authorSecret})`);
-  console.log("--archivePath", `(you provided ${archivePath})`);
-  console.log("--dirPath", `(you provided ${dirPath})`);
-
-  console.groupEnd();
+if (!settings.author) {
+  console.log("Can't use this script without an author keypair in settings.");
+  console.log("Either add an existing keypair or generate a new one.");
   Deno.exit(1);
 }
 
-const tempDirPath = await Deno.makeTempDir();
+const replica = await pickReplica();
 
-const replica = await replicaFromArchive({
-  shareAddress: share,
-  fsDriverPath: tempDirPath,
-  archivePath,
-  shareSecret,
+const dirPath = await Input.prompt({
+  message: `Where is the directory you'd like to sync with this share?`,
 });
 
 await Earthstar.syncReplicaAndFsDir({
   replica,
   dirPath,
-  keypair: { address: author, secret: authorSecret },
+  keypair: settings.author,
   allowDirtyDirWithoutManifest: true,
   overwriteFilesAtOwnedPaths: true,
 });
 
-// Now zip contents and write them to the given path.
-await replicaToArchive(tempDirPath, archivePath);
+await replica.close(false);
 
-await replica.close(true);
+console.log(`Synced ${replica.share} with ${dirPath}`);

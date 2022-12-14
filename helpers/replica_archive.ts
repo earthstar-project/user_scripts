@@ -3,7 +3,7 @@ import {
   join,
   relative,
 } from "https://deno.land/std@0.158.0/path/mod.ts";
-import * as Earthstar from "https://deno.land/x/earthstar@v10.0.0-alpha.3/mod.ts";
+import { Earthstar } from "../deps.ts";
 import { Tar, Untar } from "https://deno.land/std@0.158.0/archive/tar.ts";
 import {
   ensureDir,

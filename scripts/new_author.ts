@@ -1,4 +1,4 @@
-import * as Earthstar from "https://deno.land/x/earthstar@v10.0.0-alpha.3/mod.ts";
+import { Earthstar } from "../deps.ts";
 
 const name = Deno.args[0];
 
@@ -16,7 +16,22 @@ if (Earthstar.isErr(result)) {
   Deno.exit(1);
 }
 
-console.group("Success");
+const settings = new Earthstar.ClientSettings();
+
+if (settings.author) {
+  const doesWantToReplace = confirm(
+    `Settings already has ${settings.author.address} stored. Are you sure you want to replace it?`,
+  );
+
+  if (!doesWantToReplace) {
+    console.log("Aborting...");
+    Deno.exit(0);
+  }
+}
+
+settings.author = result;
+
+console.group(`New keypair saved to settings.`);
 console.log("Author address:", result.address);
 console.log("Author secret:", result.secret);
 console.groupEnd();

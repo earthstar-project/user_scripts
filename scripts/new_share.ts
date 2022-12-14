@@ -1,4 +1,4 @@
-import * as Earthstar from "https://deno.land/x/earthstar@v10.0.0-alpha.3/mod.ts";
+import { Earthstar } from "../deps.ts";
 
 const name = Deno.args[0];
 
@@ -14,7 +14,12 @@ if (Earthstar.isErr(result)) {
   Deno.exit(1);
 }
 
-console.group("Success");
+const settings = new Earthstar.ClientSettings();
+
+settings.addShare(result.shareAddress);
+await settings.addSecret(result.shareAddress, result.secret);
+
+console.group("Added the new share to your settings.");
 console.log("Share address:", result.shareAddress);
 console.log("Share secret:", result.secret);
 console.groupEnd();

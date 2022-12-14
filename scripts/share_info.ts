@@ -1,47 +1,31 @@
-import { parse } from "https://deno.land/std@0.158.0/flags/mod.ts";
-import { replicaFromArchive } from "../helpers/replica_archive.ts";
+import { pickReplica } from "../helpers/pick_replica.ts";
 
-const { share, archivePath } = parse(Deno.args, {
-  string: ["share", "docPath", "archivePath", "outputPath"],
-});
+try {
+  const replica = await pickReplica();
 
-if (
-  !share || !archivePath
-) {
-  console.group("You must provide a flag for the following:");
+  const allDocs = await replica.getAllDocs();
+  const allAuthors = await replica.queryAuthors();
 
-  console.log("--share", `(you provided ${share})`);
+  let latestTimestamp = 0;
 
-  console.log("--archivePath", `(you provided ${archivePath})`);
+  for (const doc of allDocs) {
+    if (doc.timestamp > latestTimestamp) {
+      latestTimestamp = doc.timestamp;
+    }
+  }
+
+  console.group(replica.share);
+  console.log("Number of docs:", allDocs.length);
+  console.log("Number of authors:", allAuthors.length);
+  console.log(
+    "Last updated:",
+    new Date(latestTimestamp / 1000).toLocaleString(),
+  );
 
   console.groupEnd();
+
+  Deno.exit(0);
+} catch (err) {
+  console.log(err);
   Deno.exit(1);
 }
-
-const tempDirPath = await Deno.makeTempDir();
-
-const replica = await replicaFromArchive({
-  shareAddress: share,
-  fsDriverPath: tempDirPath,
-  archivePath,
-});
-
-const allDocs = await replica.getAllDocs();
-const allAuthors = await replica.queryAuthors();
-
-let latestTimestamp = 0;
-
-for (const doc of allDocs) {
-  if (doc.timestamp > latestTimestamp) {
-    latestTimestamp = doc.timestamp;
-  }
-}
-
-console.group(share);
-console.log("Number of docs:", allDocs.length);
-console.log("Number of authors:", allAuthors.length);
-console.log("Last updated:", new Date(latestTimestamp / 1000).toLocaleString());
-
-console.groupEnd();
-
-Deno.exit(0);
