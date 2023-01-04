@@ -13,7 +13,7 @@ peer.addReplica(replica);
 
 console.log("Syncing...");
 
-const settings = new Earthstar.ClientSettings();
+const settings = new Earthstar.SharedSettings();
 
 const url = await Input.prompt({
   message: "What is the URL of the server you'd you like to sync with?",

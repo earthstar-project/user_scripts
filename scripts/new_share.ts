@@ -14,7 +14,7 @@ if (Earthstar.isErr(result)) {
   Deno.exit(1);
 }
 
-const settings = new Earthstar.ClientSettings();
+const settings = new Earthstar.SharedSettings();
 
 settings.addShare(result.shareAddress);
 await settings.addSecret(result.shareAddress, result.secret);

@@ -16,7 +16,7 @@ if (Earthstar.isErr(result)) {
   Deno.exit(1);
 }
 
-const settings = new Earthstar.ClientSettings();
+const settings = new Earthstar.SharedSettings();
 
 if (settings.author) {
   const doesWantToReplace = confirm(
