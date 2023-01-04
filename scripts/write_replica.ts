@@ -26,7 +26,7 @@ function pathHasFileExtension(path: string): boolean {
   return true;
 }
 
-const settings = new Earthstar.ClientSettings();
+const settings = new Earthstar.SharedSettings();
 
 if (!settings.author) {
   console.error(

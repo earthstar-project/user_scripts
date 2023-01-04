@@ -8,7 +8,7 @@ const secret = await Input.prompt({
   message: "What is the existing keypair's secret?",
 });
 
-const settings = new Earthstar.ClientSettings();
+const settings = new Earthstar.SharedSettings();
 
 if (settings.author) {
   const doesWantToReplace = confirm(

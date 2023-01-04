@@ -8,7 +8,7 @@ const secret = await Input.prompt({
   message: "What is the share's secret? (optional)",
 });
 
-const settings = new Earthstar.ClientSettings();
+const settings = new Earthstar.SharedSettings();
 
 const addAddressRes = settings.addShare(address);
 

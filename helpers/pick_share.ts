@@ -4,7 +4,7 @@ export async function pickShare(): Promise<{
   address: string;
   secret: string | undefined;
 }> {
-  const settings = new Earthstar.ClientSettings();
+  const settings = new Earthstar.SharedSettings();
 
   if (settings.shares.length === 0) {
     throw "No known shares.";

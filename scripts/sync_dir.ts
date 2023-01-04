@@ -1,7 +1,7 @@
 import { Earthstar, Input } from "../deps.ts";
 import { pickReplica } from "../helpers/pick_replica.ts";
 
-const settings = new Earthstar.ClientSettings();
+const settings = new Earthstar.SharedSettings();
 
 if (!settings.author) {
   console.log("Can't use this script without an author keypair in settings.");
