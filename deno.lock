@@ -268,6 +268,8 @@
     "https://deno.land/x/earthstar@v10.0.0/src/util/shared_settings.ts": "9d047af2b958f39a78412cc95ad155b00084555bb5ec997433abc75ef99db91e",
     "https://deno.land/x/earthstar@v10.0.0/src/util/streams.ts": "b9542e8949060f2bca52b9ebde709cfb2da81e7d0203314499826db7e13da1fb",
     "https://deno.land/x/earthstar@v10.0.0/src/util/xxhash64.js": "ad885672fba660ae1df68dd9fe0580587beaf6d408bb9ed560d272c4523b74f0",
+    "https://deno.land/x/epub_metadata@0.1.3/mod.ts": "db534c3927a4096f96df147481a1e4cb8a979cc437b40a29e237caa21d77275a",
+    "https://deno.land/x/epub_metadata@0.1.3/src/get_epub_metadata.ts": "3179a4806f84ee8c5627238e15a5111eddaa6be03191c2eb3dc89174a5627b64",
     "https://deno.land/x/for_awaitable_queue@1.0.0/mod.ts": "a2fb2014da6401733499376cb58a9ae82819aea6471bf8df8388dcbed58a52f9",
     "https://deno.land/x/range_reconcile@0.1.2/mod.ts": "bf886668195e27bce5a958a2b3bcb8f2ed47e1f2d2e782db08d8ab1948b6e7ae",
     "https://deno.land/x/range_reconcile@0.1.2/src/fingerprint_tree/fingerprint_tree.ts": "1a18915414e057344a7c4559862c9ab80fcb6b59ad0e7d295f051df5cfd9a672",

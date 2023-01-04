@@ -1,55 +1,17 @@
-import { DocEs5 } from "https://deno.land/x/earthstar@v10.0.0/mod.ts";
-import { getEpubMetadata } from "https://deno.land/x/epub_metadata/mod.ts";
 import { Earthstar, Input, Select } from "../../deps.ts";
 import { pickReplica } from "../../helpers/pick_replica.ts";
+import { getAllBooks } from "./util.ts";
 
 // Pick replica
 const replica = await pickReplica();
 
-// Make list of books
-
-const bookDocs = await replica.queryDocs({
-  filter: {
-    pathStartsWith: "/books/~",
-    pathEndsWith: ".epub",
-  },
-});
-
-type BookshelfItem = {
-  title: string;
-  creator: string;
-  document: DocEs5;
-};
-
-const items: Record<string, BookshelfItem> = {};
-
-for (const doc of bookDocs) {
-  // get metadata.
-  const attachment = await replica.getAttachment(doc);
-
-  if (!attachment || Earthstar.isErr(attachment)) {
-    continue;
-  }
-
-  try {
-    const metadata = await getEpubMetadata(await attachment.stream());
-
-    items[doc.attachmentHash as string] = {
-      title: metadata.title,
-      creator: metadata.creators?.join(", ") || "unknown",
-      document: doc,
-    };
-  } catch {
-    continue;
-  }
-}
+// Pick from list of books
+const allBooks = await getAllBooks(replica);
 
 const options: { name: string; value: string }[] = [];
 
-for (const hash in items) {
-  const item = items[hash];
-
-  const name = `${item.title} by ${item.creator}`;
+for (const [hash, item] of allBooks) {
+  const name = `${item.title} - ${item.creator}`;
 
   options.push({
     name,
@@ -57,13 +19,12 @@ for (const hash in items) {
   });
 }
 
-// Pick from list of books
 const choice = await Select.prompt({
   message: "Which book would you like to download?",
   options,
 });
 
-const doc = items[choice].document;
+const doc = allBooks.get(choice)!.document;
 
 const attachment = await replica.getAttachment(doc);
 
