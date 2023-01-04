@@ -15,14 +15,19 @@ All share replica data is persisted to the filesystem in `share_data`.
 
 1. Clone this repository
 2. Install the Deno runtime
-   ([Instructions](https://deno.land/manual@v1.28.3/getting_started/installation))
+   ([Instructions](https://deno.land/manual@v1.29.1/getting_started/installation))
 3. Test it all works with `deno run scripts/new_author.ts suzy`
 
 ## Available scripts
 
+### `add_server.ts`
+
+Add the URL of a server to the shared settings so that it can be synced with.
+
 ### `add_share.ts`
 
 Adds an existing share to the shared settings so that other scripts can use it.
+The first argument is the URL to be saved.
 
 ### `archive_share.ts`
 
@@ -46,6 +51,10 @@ for other scripts to use.
 
 Generates a new share keypair from a name and adds it to shared settings for
 other scripts to use.
+
+### `remove_server.ts`
+
+Removes a server from the list of servers known by `SharedSettings`.
 
 ### `save_attachment.ts`
 
