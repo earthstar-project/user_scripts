@@ -57,6 +57,10 @@ other scripts to use.
 
 Removes a server from the list of servers known by `SharedSettings`.
 
+### `remove_share.ts`
+
+Removes a share from the list of known shares.
+
 ### `save_attachment.ts`
 
 Write an attachment to your filesystem.
