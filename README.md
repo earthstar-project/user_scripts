@@ -50,6 +50,14 @@ Lists all authors from a share replica.
 
 Lists all document paths from a share replica.
 
+### `list_servers.ts`
+
+List all servers saved to shared settings.
+
+### `list_shares.ts`
+
+List all shares saved to shared settings.
+
 ### `new_author.ts`
 
 Generates a new author keypair from a shortname and adds it to shared settings
