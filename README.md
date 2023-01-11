@@ -45,7 +45,8 @@ Lists all document paths from a share replica.
 ### `new_author.ts`
 
 Generates a new author keypair from a shortname and adds it to shared settings
-for other scripts to use.
+for other scripts to use. The sole argument of this script is the four character
+shortname used in the new keypair.
 
 ### `new_share.ts`
 
