@@ -92,9 +92,14 @@ your friend.
 
 Sync the contents of a filesystem directory with a share replica.
 
+### `sync_all.ts`
+
+Sync all known shares with all known servers (only shares held in common by both
+sides will be synced).
+
 ### `sync_with_server.ts`
 
-Sync a share replica with an Earthstar server.
+Sync one share replica with one Earthstar server.
 
 ### `write_replica`
 
