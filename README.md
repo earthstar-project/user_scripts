@@ -34,6 +34,14 @@ The first argument is the URL to be saved.
 Archives a share replica's data to a zip file. You can then put that archive on
 a USB key and give it to a friend for syncing, or back it up.
 
+### `current_author.ts`
+
+Display the current author keypair saved to shared settings.
+
+### `forget_author.ts`
+
+Forget the current author keypair saved to shared settings.
+
 ### `list_authors.ts`
 
 Lists all authors from a share replica.
