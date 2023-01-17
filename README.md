@@ -34,6 +34,14 @@ The first argument is the URL to be saved.
 Archives a share replica's data to a zip file. You can then put that archive on
 a USB key and give it to a friend for syncing, or back it up.
 
+### `current_author.ts`
+
+Display the current author keypair saved to shared settings.
+
+### `forget_author.ts`
+
+Forget the current author keypair saved to shared settings.
+
 ### `list_authors.ts`
 
 Lists all authors from a share replica.
@@ -41,6 +49,14 @@ Lists all authors from a share replica.
 ### `list_paths.ts`
 
 Lists all document paths from a share replica.
+
+### `list_servers.ts`
+
+List all servers saved to shared settings.
+
+### `list_shares.ts`
+
+List all shares saved to shared settings.
 
 ### `new_author.ts`
 
@@ -56,6 +72,10 @@ other scripts to use.
 ### `remove_server.ts`
 
 Removes a server from the list of servers known by `SharedSettings`.
+
+### `remove_share.ts`
+
+Removes a share from the list of known shares.
 
 ### `save_attachment.ts`
 
@@ -80,9 +100,14 @@ your friend.
 
 Sync the contents of a filesystem directory with a share replica.
 
+### `sync_all.ts`
+
+Sync all known shares with all known servers (only shares held in common by both
+sides will be synced).
+
 ### `sync_with_server.ts`
 
-Sync a share replica with an Earthstar server.
+Sync one share replica with one Earthstar server.
 
 ### `write_replica`
 
