@@ -90,6 +90,10 @@ scripts to use.
 
 Prints some info about a share replica.
 
+### `show_share_secret.ts`
+
+Displays the secret of a chosen share.
+
 ### `sync_archive.ts`
 
 Takes a zipped share archive, and syncs it with our own data for that share.
